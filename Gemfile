@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
+
+# Rails and Postgres are used to test the gem.
+gem 'pg'
+gem 'rails'
+
+# Rubocop is used on CI to enforce the Ruby style guide.
+gem 'rubocop'
+
+# Allows us to write unit tests.
+gem 'minitest'
+
+# Used to define a few tasks for testing.
+gem 'rake'
+
+gemspec
