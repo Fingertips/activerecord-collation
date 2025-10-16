@@ -1,0 +1,6 @@
+test:
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  pool: 16
+  database: active_record_collation_test
