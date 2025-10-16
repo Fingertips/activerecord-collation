@@ -1,0 +1,28 @@
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.3
+  Exclude:
+    - test/dummy/db/schema.rb
+Layout/LineLength:
+  Max: 100
+Metrics/BlockLength:
+  Exclude:
+    # Test blocks are long.
+    - test/**/*_test.rb
+    - activerecord-collation.gemspec
+Metrics/ClassLength:
+  Max: 150
+  Exclude:
+    # Test classes are long.
+    - test/**/*_test.rb
+Metrics/MethodLength:
+  Max: 14
+  Exclude:
+    # Test methods are long.
+    - test/**/*_test.rb
+Naming/FileName:
+  Exclude:
+    - lib/activerecord-collation.rb
+Style/AsciiComments:
+  Enabled: false
