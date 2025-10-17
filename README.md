@@ -18,17 +18,17 @@ See [Postgres collation documentation](https://www.postgresql.org/docs/current/c
 
 ## Setup
 
-Add `activerecord-collations` to your dependencies. If you also want the `collate` class method on your model you also include the collation module:
+Add `activerecord-collations` to your dependencies. Include the collation concern into your models to get access to the `collate` class method.
 
 ```ruby
 class ApplicationRecord < ActiveRecord::Base
-  self.abstract_class = true
+  primary_abstract_class
 
   include ActiveRecord::Collation
 end
 ```
 
-The collate method creates an ARel expression for the column with a certain collation.
+The `collate` method creates an ARel expression for the column with a certain collation.
 
 ```ruby
 scope :ordered, -> { order(collate(:title, "natural_#{I18n.locale}") }
@@ -45,11 +45,11 @@ Arel::Nodes::InfixOperation.new(
 )
 ```
 
-## Testing
+## Development
 
-The Dummy application uses the gem so you can load the schema and run migrations there:
+Run tests in this repository with `rake`. Migrations are exercised by running them in the dummy application.
 
 ```
 cd test/dummy
-RAILS_ENV=test rake db:migrate
+rm -f db/schema.rb && RAILS_ENV=test rake db:drop db:create db:migrate
 ```
