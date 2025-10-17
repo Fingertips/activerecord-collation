@@ -4,3 +4,5 @@ test:
   host: localhost
   pool: 16
   database: active_record_collation_test
+  user: <%= ENV.fetch("POSTGRES_USER", nil) %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD", nil) %>

@@ -1,0 +1,36 @@
+on: [push]
+env:
+  # Sets the superuser username and password for PostgreSQL.
+  POSTGRES_USER: github
+  POSTGRES_PASSWORD: oiz5FeebOosh6aet
+jobs:
+  build:
+    strategy:
+      matrix:
+        ruby_version: ["3.4", "3.3"]
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          # Default database that is created when the image is first started.
+          POSTGRES_DB: active_record_collation_test
+          # This is so dumb…
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+          bundler-cache: true
+      - run: bundle exec rubocop
+      - run: cd test/dummy && rm -f db/schema.rb && RAILS_ENV=test bundle exec rake db:drop db:create db:migrate
+      - run: bundle exec rake test
