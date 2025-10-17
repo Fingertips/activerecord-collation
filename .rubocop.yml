@@ -4,6 +4,7 @@ AllCops:
   TargetRubyVersion: 3.3
   Exclude:
     - test/dummy/db/schema.rb
+    - vendor/**/*
 Layout/LineLength:
   Max: 100
 Metrics/BlockLength:
