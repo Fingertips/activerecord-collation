@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   Collation support for Active Record.
   SUMMARY
   spec.description = <<-DESCRIPTION
-  Adds methods like create_collation to manage collations in your Ruby on Rials project.
+  Adds methods like create_collation to manage collations in your Ruby on Rails project.
   DESCRIPTION
   spec.homepage = 'https://github.com/Fingertips/activerecord-collation'
   spec.license = 'MIT'
