@@ -51,5 +51,7 @@ Run tests in this repository with `rake`. Migrations are exercised by running th
 
 ```
 cd test/dummy
-rm -f db/schema.rb && RAILS_ENV=test rake db:drop db:create db:migrate
+rm -f db/schema.rb && RAILS_ENV=test bundle exec rake db:drop db:create db:migrate
+cd ../../
+bundle exec rake
 ```
