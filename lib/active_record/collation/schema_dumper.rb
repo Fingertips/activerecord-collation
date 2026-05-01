@@ -10,15 +10,15 @@ module ActiveRecord
         collations = @connection.collations
         return unless collations.any?
 
-        stream.puts
         collations.each do |row|
           stream.puts(
             "  create_collation(#{row['collname'].inspect}, #{row['colllocale'].inspect})"
           )
         end
+        stream.puts
       end
 
-      def trailer(stream)
+      def tables(stream)
         collations(stream)
         super
       end
