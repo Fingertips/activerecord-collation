@@ -18,14 +18,31 @@ module ActiveRecord
       end
 
       def collations
-        internal_exec_query(<<~SQL, 'SCHEMA')
-          SELECT
-            pg_collation.collname,
-            pg_collation.colllocale
-          FROM pg_collation
-          JOIN pg_namespace
-          ON pg_collation.collnamespace = pg_namespace.oid AND pg_namespace.nspname = 'public'
-        SQL
+        internal_exec_query(collations_sql, 'SCHEMA')
+      end
+
+      private
+
+      def collations_sql # rubocop:disable Metrics/MethodLength
+        if database_version >= 170_000
+          <<~SQL
+            SELECT
+              pg_collation.collname,
+              pg_collation.colllocale
+            FROM pg_collation
+            JOIN pg_namespace
+            ON pg_collation.collnamespace = pg_namespace.oid AND pg_namespace.nspname = 'public'
+          SQL
+        else
+          <<~SQL
+            SELECT
+              pg_collation.collname,
+              pg_collation.colliculocale AS colllocale
+            FROM pg_collation
+            JOIN pg_namespace
+            ON pg_collation.collnamespace = pg_namespace.oid AND pg_namespace.nspname = 'public'
+          SQL
+        end
       end
     end
   end

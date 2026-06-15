@@ -14,8 +14,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_01_120001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
-  create_collation("natural_de", "de-u-ka-shifted-kn-ks-level1-kv-symbol")
-  create_collation("natural_en", "en-u-ka-shifted-kn-ks-level1-kv-symbol")
+  create_collation("natural_de", "de-u-kn-true-ks-level1-ka-shifted-kv-symbol")
+  create_collation("natural_en", "en-u-kn-true-ks-level1-ka-shifted-kv-symbol")
 
   create_table "clients", force: :cascade do |t|
     t.text "name", null: false
