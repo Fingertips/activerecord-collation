@@ -50,6 +50,18 @@ Arel::Nodes::InfixOperation.new(
 Run tests in this repository with `rake`. Migrations are exercised by running them in the dummy application.
 
 ```
+bundle install
+cd test/dummy
+rm -f db/schema.rb && RAILS_ENV=test bundle exec rake db:drop db:create db:migrate
+cd ../../
+bundle exec rake
+```
+
+If you also want to verify running tests on Rails Edge, you can set `BUNDLE_GEMFILE` and run everything again. Otherwise could technically also rely on GitHub Actions to run this for you.
+
+```
+export BUNDLE_GEMFILE=$(pwd)/Gemfile.edge
+bundle install
 cd test/dummy
 rm -f db/schema.rb && RAILS_ENV=test bundle exec rake db:drop db:create db:migrate
 cd ../../
