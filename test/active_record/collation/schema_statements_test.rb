@@ -18,6 +18,20 @@ module ActiveRecord
         ApplicationRecord.connection.drop_collation(:misc)
         assert_equal_set(%w[natural_de natural_en], collation_names)
       end
+
+      test 'notifies internals about the executed queries' do
+        queries = []
+        callback = ->(event) { queries << event.payload[:sql] }
+
+        ActiveSupport::Notifications.subscribed(callback, 'sql.active_record') do
+          collation_names
+        end
+
+        assert_includes(
+          queries.last,
+          "pg_namespace.nspname = 'public'"
+        )
+      end
     end
   end
 end

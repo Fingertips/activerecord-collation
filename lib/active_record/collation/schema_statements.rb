@@ -18,7 +18,7 @@ module ActiveRecord
       end
 
       def collations
-        internal_exec_query(collations_sql, 'SCHEMA')
+        select_all(collations_sql, 'SCHEMA')
       end
 
       private
