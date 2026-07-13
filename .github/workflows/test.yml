@@ -4,12 +4,15 @@ env:
   POSTGRES_USER: github
   POSTGRES_PASSWORD: oiz5FeebOosh6aet
 jobs:
-  build:
+  test:
     strategy:
       matrix:
+        gemfile: [ "Gemfile", "Gemfile.edge" ]
         ruby_version: ["4.0", "3.3"]
         postgres_version: ["18", "15"]
     runs-on: ubuntu-latest
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/${{ matrix.gemfile }}
     services:
       postgres:
         image: postgres:${{ matrix.postgres_version }}
