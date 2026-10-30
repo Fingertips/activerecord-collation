@@ -14,11 +14,11 @@ class UpdateNaturalDeCollation < ActiveRecord::Migration[8.1]
 end
 ```
 
-See [Postgres collation documentation](https://www.postgresql.org/docs/current/collation.html) on how to write  ICU locale strings.
+See [Postgres collation documentation](https://www.postgresql.org/docs/current/collation.html) on how to write ICU locale strings.
 
 ## Setup
 
-Add `activerecord-collations` to your dependencies. Include the collation concern into your models to get access to the `collate` class method.
+Add `activerecord-collation` to your dependencies. Include the collation concern into your models to get access to the `collate` class method.
 
 ```ruby
 class ApplicationRecord < ActiveRecord::Base
